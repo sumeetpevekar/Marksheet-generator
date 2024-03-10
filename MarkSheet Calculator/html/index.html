@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <link rel="stylesheet" href="../css/style.css">
+        <script src="../js/app.js"></script>
+        <link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/><link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+        <script src="https://kit.fontawesome.com/5c0a4f6834.js" crossorigin="anonymous"></script>
+        <!-- <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script> -->
+        <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script> -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.4.1/jspdf.debug.js"></script>
+        <!-- <script src="https://code.jquery.com/jquery-3.7.1.js"></script> -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.js"></script>
+</head> 
+<body>
+    <div class="container">
+        <h1 id="title">MarkSheet Creator</h1>
+        <div class="form-card"><!-- class="animate__animated animate__slideInLeft"-->
+            <form action="" id="markSheetForm">
+                <div id="horizontal">
+                    <div id="form-group">
+                        <label>School Logo</label>
+                        <input type="file" name="schoolLogo" accept="image/*" id="school-pic-input">
+                    </div>
+                    <div id="form-group">
+                        <label>School name</label>
+                        <input type="text" name="schoolName" placeholder="" id="schoolNameInput">
+                    </div>
+                    <div id="form-group">
+                        <label>Tagline</label>
+                        <input type="text" name="schoolTagline" placeholder="" id="schoolTaglineInput">
+                    </div>
+                </div>
+                <div id="horizontal">
+                    <div id="form-group">
+                        <label>Student Image</label>
+                        <input type="file" name="candidateImage" accept="image/*" id="student-pic-input">
+                    </div>
+                    <div id="form-group">
+                        <label>Student name</label>
+                        <input type="text" name="candidateName" placeholder="er saurav" id="studentNameInput">
+                    </div>
+                    <div id="form-group">
+                        <label>Father's name</label>
+                        <input type="text" name="fatherName" placeholder="mr raj" id="fatherNameInput">
+                    </div>
+                </div>
+                <div id="horizontal">
+                    <div id="form-group">
+                        <label>Date Of Birth</label>
+                        <input type="date" name="dateOfBirth" id="dateInput">
+                    </div>
+                    <div id="form-group">
+                        <label>Gender</label>
+                        <select name="gender" id="genderInput">
+                            <option value="noValue" selected>Select Your Gender</option>
+                            <option value="female">Female</option>
+                            <option value="male">Male</option>
+                        </select>
+                    </div>
+                    <div id="form-group">
+                        <label>Class</label>
+                        <input type="number" name="class" min="1" max="12"  placeholder="6" id="classInput">
+                    </div>
+                    <div id="form-group">
+                        <label>Roll No.</label>
+                        <input type="number" name="rollNo" min="1" max="100" placeholder="0" id="rollNoInput">
+                    </div>
+                </div>
+                <button id="add-subjects" type="button"><i id="plus" class="fa-solid fa-plus"></i>Add Subjects</button>
+                <div id="dynamic-area">
+                </div>
+                    <button id="generate" type="button"><i id="plus" class="fa-solid fa-download"></i>Generate Your MarkSheet Now</button>
+            </form>
+        </div>
+        <div id="result-card"><!-- class="animate__animated animate__slideInLeft"-->
+            <div class="preview-container">
+                <table width="100%" class="resultTable">
+                    <tr>
+                        <th width="150">
+                        <img id="school-img" src="../images/school-logo.png" alt="" width="100%">
+                    </th>
+                    <td align="center">
+                        <h1 id="school-name">Sarasvati vidya niketan school</h1>
+                        <span id="school-tagline">Maharashtra state Board Of Secondary and Higher Secondary Education, Mumbai</span>
+                    </td>
+                </tr>
+                
+            </table>
+            <table width="100%" class="resultTable">
+                <tr>
+                    <th width="150" rowspan="4">
+                        <img id="student-img" src="../images/student.webp"  alt="" width="100%">
+                    </th>
+                    <tr>
+                        <th width="100">Student's Name</th>
+                        <td id="student-name">sumeet pevekar</td>
+                        <th width="150">Father's Name</th>
+                        <td id="father-name">sumeet pevekar</td>
+                    </tr>
+                    <tr>
+                        <th width="100">Date Of Birth</th>
+                        <td id="date-input">00-00-0000</td>
+                        <th width="100">Gender</th>
+                        <td id="gender-text">Male</td>
+                    </tr>
+                    <tr>
+                        <th width="150">Class</th>
+                        <td id="class-text">4th</td>
+                        <th width="100">Roll</th>
+                        <td id="rollNo-text">12</td>
+                    </tr>
+                </tr>
+            </table>
+            <table width="100%" class="resultTable">
+                <tr>
+                    <th colspan="3">Subjects</th>
+                    <th>Full Marks</th>
+                    <th colspan="2">Obtained Marks</th>
+                </tr>
+                <tbody id="subject-body"></tbody>
+                <tr>
+                    <th colspan="5" align="right">Total Marks </th>
+                    <th id="final-marks">0</th>
+                </tr>
+                <tr>
+                    <th colspan="2" align="right">Grade</th>
+                    <td align="center" id="grade-text">A</td>
+                    <th colspan="2" align="right">Percentage</th>
+                    <td align="center" id="percentage">0</td>
+                </tr>
+            </table>
+            <p id="footer">&copy; Sumeet pevekar | All Rights Reserved</p>
+            </div>
+        </div>
+
+    </div>    
+</body>
+</html>
